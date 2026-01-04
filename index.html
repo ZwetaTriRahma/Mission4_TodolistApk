@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doitly - Modern To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main-wrapper">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-content">
+                <div class="sidebar-icon">✨</div>
+                <h2 class="sidebar-title">Stay Productive</h2>
+                <p class="sidebar-text">
+                    Transform your daily chaos into organized success. 
+                    Track your tasks, set priorities, and achieve your goals one checkmark at a time.
+                </p>
+                
+                <div class="sidebar-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Always Available</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Free Forever</div>
+                    </div>
+                </div>
+
+                <div class="sidebar-features">
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Set deadlines & reminders</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Priority levels</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Track your progress</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Never lose your data</span>
+                    </div>
+                </div>
+
+                <div class="sidebar-quote">
+                    <p>"The secret of getting ahead is getting started."</p>
+                    <span>- Mark Twain</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <div class="container">
+                <!-- APP TITLE HEADER -->
+                <div class="app-header">
+                    <h1>Doitly!</h1>
+                    <p class="app-tagline">Yesterday, you said tomorrow right?</p>
+                </div>
+
+                <header>
+                    <div class="profile-section">
+                        <div class="profile-picture">JD</div>
+                        <div class="profile-info">
+                            <h2>Zweta Tri Rahma</h2>
+                            <p>Junior HariSenin Fullstack Developer</p>
+                        </div>
+                    </div>
+                    <div class="date-section">
+                        <p id="currentDate"></p>
+                    </div>
+                </header>
+
+                <section class="task-input-section">
+                    <h3>Add New Task</h3>
+                    <div class="input-group">
+                        <div class="input-wrapper">
+                            <input type="text" id="taskInput" placeholder="Enter your task..." />
+                            <button class="add-btn" id="addTaskBtn">+</button>
+                        </div>
+                        <div class="time-deadline-wrapper">
+                            <div class="input-field-wrapper">
+                                <label for="taskTime">Time</label>
+                                <input type="time" id="taskTime" />
+                            </div>
+                            <div class="input-field-wrapper">
+                                <label for="taskDeadline">Deadline</label>
+                                <input type="date" id="taskDeadline" />
+                            </div>
+                        </div>
+                        <div class="priority-selector">
+                            <button class="priority-btn active" data-priority="low">Low</button>
+                            <button class="priority-btn" data-priority="medium">Medium</button>
+                            <button class="priority-btn" data-priority="high">High</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- OVERDUE SECTION -->
+                <section class="overdue-section" id="overdueSection" style="display: none;">
+                    <div class="column-header overdue-header">
+                        <div class="header-with-count">
+                            <h3>⚠️ Overdue Tasks</h3>
+                            <span class="overdue-count" id="overdueCount">0</span>
+                        </div>
+                        <button class="delete-all-btn" id="deleteAllOverdue">Clear All</button>
+                    </div>
+                    <div class="task-list" id="overdueList"></div>
+                </section>
+
+                <main>
+                    <section>
+                        <div class="column-header">
+                            <h3>To Do</h3>
+                            <button class="delete-all-btn" id="deleteAllTodo">Delete All</button>
+                        </div>
+                        <div class="task-list" id="todoList"></div>
+                    </section>
+
+                    <section>
+                        <div class="column-header">
+                            <h3>Done</h3>
+                            <button class="delete-all-btn" id="deleteAllDone">Delete All</button>
+                        </div>
+                        <div class="task-list" id="doneList"></div>
+                    </section>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <!-- EDIT MODAL -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Task</h3>
+            </div>
+            <div class="modal-body">
+                <div class="input-field-wrapper">
+                    <label for="editTaskInput">Task</label>
+                    <input type="text" id="editTaskInput" placeholder="Enter your task..." />
+                </div>
+                <div class="time-deadline-wrapper">
+                    <div class="input-field-wrapper">
+                        <label for="editTaskTime">Time</label>
+                        <input type="time" id="editTaskTime" />
+                    </div>
+                    <div class="input-field-wrapper">
+                        <label for="editTaskDeadline">Deadline</label>
+                        <input type="date" id="editTaskDeadline" />
+                    </div>
+                </div>
+                <div class="input-field-wrapper">
+                    <label>Priority</label>
+                    <div class="priority-selector">
+                        <button class="priority-btn" data-priority="low">Low</button>
+                        <button class="priority-btn" data-priority="medium">Medium</button>
+                        <button class="priority-btn" data-priority="high">High</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-secondary" id="cancelEditBtn">Cancel</button>
+                <button class="modal-btn modal-btn-primary" id="saveEditBtn">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
